@@ -36,7 +36,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
           - name: APP_VERSION
-            value: {{ .Chart.AppVersion }}          
+            value: {{ .Chart.AppVersion | quote }}          
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
