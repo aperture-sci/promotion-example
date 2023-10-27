@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "loans.fullname" . }}
+  name: {{ include "interest.fullname" . }}
   labels:
-    {{- include "loans.labels" . | nindent 4 }}
+    {{- include "interest.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      {{- include "loans.selectorLabels" . | nindent 6 }}
+      {{- include "interest.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -17,7 +17,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "loans.labels" . | nindent 8 }}
+        {{- include "interest.labels" . | nindent 8 }}
 	{{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -36,7 +36,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
           - name: APP_VERSION
-            value: {{ .Chart.AppVersion }}
+            value: {{ .Chart.AppVersion }}          
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
